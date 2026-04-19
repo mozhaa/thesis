@@ -162,12 +162,59 @@
 
 \draw[arrow] ([yshift=-0.3cm] childnode.east) to[out=0, in=220, looseness=1.2] ([yshift=-0.3cm] blockC.north west);
 
-\node[draw=none, font=\bfseries, anchor=south, above=0.5cm of current bounding box.north] {Binary File Layout – compio Library};
-
 \end{tikzpicture}
 
-\caption{Структуры внутри файла-контейнера и связи между ними}
+\caption{Структуры внутри файла-контейнера и связи между ними.}
 \label{fig:container}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\small]
+
+\def\headerW{1.5}
+\def\bTreeRootW{2.0}
+\def\storageW{1.5}
+\def\emptyW{1.2}
+\def\filesTableW{2.0}
+\def\bTreeNodeW{2.0}
+
+\def\headerX{0}
+\def\bTreeRootX{\headerX+\headerW}
+\def\storageAX{\bTreeRootX+\bTreeRootW}
+\def\emptyX{\storageAX+\storageW}
+\def\filesTableX{\emptyX+\emptyW}
+\def\storageBX{\filesTableX+\filesTableW}
+\def\bTreeNodeX{\storageBX+\storageW}
+
+\pgfmathsetmacro{\totalW}{\headerX+\headerW+\bTreeRootW+\storageW+\emptyW+\filesTableW+\storageW+\bTreeNodeW}
+\def\blockH{0.6}
+
+\draw[thick] (0,-0.2) -- (\totalW,-0.2);
+\draw[->] (\totalW,-0.2) -- (\totalW+0.3,-0.2) node[right] {offset};
+
+\draw[fill=yellow!20] (\headerX,0) rectangle (\headerX+\headerW,\blockH);
+\draw[fill=blue!10] (\bTreeRootX,0) rectangle (\bTreeRootX+\bTreeRootW,\blockH);
+\draw[fill=green!10] (\storageAX,0) rectangle (\storageAX+\storageW,\blockH);
+\draw[fill=gray!10] (\emptyX,0) rectangle (\emptyX+\emptyW,\blockH);
+\draw[fill=orange!20] (\filesTableX,0) rectangle (\filesTableX+\filesTableW,\blockH);
+\draw[fill=green!10] (\storageBX,0) rectangle (\storageBX+\storageW,\blockH);
+\draw[fill=blue!10] (\bTreeNodeX,0) rectangle (\bTreeNodeX+\bTreeNodeW,\blockH);
+
+\node[anchor=south west, rotate=45] at (\headerX+\headerW/2, \blockH) {Header};
+\node[anchor=south west, rotate=45] at (\bTreeRootX+\bTreeRootW/2, \blockH) {B‑Tree Root};
+\node[anchor=south west, rotate=45] at (\storageAX+\storageW/2, \blockH) {Storage Block};
+\node[anchor=south west, rotate=45] at (\emptyX+\emptyW/2, \blockH) {Empty Space};
+\node[anchor=south west, rotate=45] at (\filesTableX+\filesTableW/2, \blockH) {Files Table};
+\node[anchor=south west, rotate=45] at (\storageBX+\storageW/2, \blockH) {Storage Block};
+\node[anchor=south west, rotate=45] at (\bTreeNodeX+\bTreeNodeW/2, \blockH) {B‑Tree Node};
+
+\node[below] at (0,-0.4) {0};
+\node[below] at (\totalW,-0.4) {file\_size};
+
+\end{tikzpicture}
+\caption{Расположение структур внутри файла-контейнера. В начале расположен заголовок, а далее структуры расположены в произвольном порядке, который создается за счёт аллокатора.}
+\label{fig:file-layout}
 \end{figure}
 
 Файл-контейнер (физический файл в файловой системе) представляет собой бинарный файл, в котором содержатся следующие структуры: заголовок (конфигурация библиотеки, адрес узла B-дерева, список логических файлов), узлы B-дерева и сжатые блоки данных. Узлы B-дерева и сжатые блоки данных расположены вперемешку после заголовка, что возможно благодаря использованию аллокатора блоков в файле. Такой файл-контейнер полностью самодостаточен и легко подвергается переносу с одной машины на другую, так как содержит в себе всю необходимую для работы библиотеки информацию.
