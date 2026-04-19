@@ -10,6 +10,9 @@
 \usepackage{amsthm,amssymb, amsmath}
 \usepackage{textcomp}
 
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
 \begin{document}
 
 \section{Архитектура}
@@ -36,6 +39,136 @@
 \end{itemize}
 
 \subsection{Файл-контейнер}
+
+\begin{figure}[htbp]
+\centering
+
+\begin{tikzpicture}[
+    every node/.style={font=\small},
+    table/.style={draw, inner sep=2pt, align=left},
+    arrow/.style={-{Stealth[length=3mm]}, thick, black}
+]
+
+\node[table, fill=yellow!20, anchor=north west] (header) at (0,0) {
+    \begin{tabular}{l}
+        \textbf{Header} \\
+        \hline
+        magic\_number : int32\_t \\
+        \hline
+        index\_root : uint64\_t \\
+        \hline
+        file\_size : uint64\_t \\
+        \hline
+        block\_size : uint32\_t \\
+        \hline
+        b\_tree\_degree : uint32\_t \\
+        \hline
+        files\_table\_addr : uint64\_t \\
+        \hline
+        allocator\_state\_offset : uint64\_t \\
+        \hline
+        compression\_type : uint32\_t \\
+        \hline
+        checksum : uint8\_t[32]
+    \end{tabular}
+};
+
+\node[table, fill=orange!20, right=2cm of header.north east, anchor=north west] (ftable) {
+    \begin{tabular}{l}
+        \textbf{Files Table} \\
+        \hline
+        n\_files : uint64\_t \\
+        \hline
+        max\_files : uint32\_t \\
+        \hline
+        files : struct file[\,] \\
+        \hline
+        \qquad name : uint8\_t[ ] \\
+        \hline
+        \qquad size : uint64\_t
+    \end{tabular}
+};
+
+\node[table, fill=blue!10, below=0.8cm of header.south west, anchor=north west] (rootnode) {
+    \begin{tabular}{l}
+        \textbf{B‑Tree Node (Root)} \\
+        \hline
+        is\_leaf : uint8\_t \\
+        \hline
+        num\_keys : uint32\_t \\
+        \hline
+        tree\_degree : int32\_t \\
+        \hline
+        keys : tree\_key[\,] \\
+        \hline
+        values : tree\_val[\,] \\
+        \hline
+        children : uint64\_t[\,] \\
+        \hline
+        key\_additions : int64\_t[\,]
+    \end{tabular}
+};
+
+\node[table, fill=green!10, below=0.6cm of ftable.south east, anchor=north east] (blockA) {
+    \begin{tabular}{l}
+        \textbf{Storage Block} \\
+        \hline
+        signature : uint8\_t \\
+        \hline
+        is\_compressed : uint8\_t \\
+        \hline
+        size : uint64\_t \\
+        \hline
+        original\_size : uint64\_t \\
+        \hline
+        checksum : uint32\_t \\
+        \hline
+        data : uint8\_t[\,]
+    \end{tabular}
+};
+
+\node[table, fill=green!10, below=0.3cm of blockA.south east, anchor=north east] (blockB) {
+    \begin{tabular}{l}
+        \textbf{Storage Block} \\
+        \hline
+        \ldots
+    \end{tabular}
+};
+
+\node[table, fill=green!10, below=0.6cm of blockB.south east, anchor=north east] (blockC) {
+    \begin{tabular}{l}
+        \textbf{Storage Block} \\
+        \hline
+        \ldots
+    \end{tabular}
+};
+
+\node[table, fill=blue!10, left=0.6cm of blockC.south west, anchor=south east] (childnode) {
+    \begin{tabular}{l}
+        \textbf{B‑Tree Node} \\
+        \hline
+        \ldots
+    \end{tabular}
+};
+
+\draw[arrow] ([yshift=-3.4cm] header.north east) to[out=0, in=180, looseness=0.5] ([yshift=-0.3cm] ftable.north west);
+
+\draw[arrow] ([yshift=-1.4cm] header.north east) to[out=0, in=0, looseness=0.8] ([yshift=-0.3cm] rootnode.north east);
+
+\draw[arrow] ([yshift=-3.0cm] rootnode.north east) to[out=0, in=180, looseness=0.5] ([yshift=-0.3cm] blockA.north west);
+\draw[arrow] ([yshift=-3.0cm] rootnode.north east) to[out=0, in=180, looseness=0.5] ([yshift=-0.3cm] blockB.north west);
+
+\draw[arrow] ([yshift=-3.6cm] rootnode.north east) to ([yshift=-0.3cm] childnode.north west);
+
+\draw[arrow] ([yshift=-0.3cm] childnode.east) to[out=0, in=220, looseness=1.2] ([yshift=-0.3cm] blockC.north west);
+
+\node[draw=none, font=\bfseries, anchor=south, above=0.5cm of current bounding box.north] {Binary File Layout – compio Library};
+
+\end{tikzpicture}
+
+\caption{Структуры внутри файла-контейнера и связи между ними}
+\label{fig:container}
+\end{figure}
 
 Файл-контейнер (физический файл в файловой системе) представляет собой бинарный файл, в котором содержатся следующие структуры: заголовок (конфигурация библиотеки, адрес узла B-дерева, список логических файлов), узлы B-дерева и сжатые блоки данных. Узлы B-дерева и сжатые блоки данных расположены вперемешку после заголовка, что возможно благодаря использованию аллокатора блоков в файле. Такой файл-контейнер полностью самодостаточен и легко подвергается переносу с одной машины на другую, так как содержит в себе всю необходимую для работы библиотеки информацию.
 
