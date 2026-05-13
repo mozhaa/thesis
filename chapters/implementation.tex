@@ -28,8 +28,6 @@ compio_archive *compio_open_archive(const char *fp, const char *mode,
     \item \texttt{"r+"} --- открыть существующий архив для чтения и записи.
     \item \texttt{"w"} --- создать новый архив (если файл существует, он перезаписывается).
     \item \texttt{"w+"} --- создать новый архив для чтения и записи.
-    \item \texttt{"a"} --- открыть существующий архив для добавления; все вновь открываемые логические файлы изначально позиционируются в конец, существующие данные сохраняются.
-    \item \texttt{"a+"} --- эквивалентно \texttt{"a"}.
 \end{itemize}
 Третий аргумент должен быть указателем на структуру конфигурации \texttt{compio\_config}. При успешном открытии возвращается указатель на \texttt{compio\_archive}, при ошибке --- \texttt{NULL}, а код ошибки помещается в \texttt{errno}. Архив закрывается вызовом \texttt{compio\_close\_archive}, который сбрасывает все кэши, синхронизирует метаданные с диском и освобождает ресурсы.
 
@@ -60,7 +58,7 @@ compio_file *compio_open_file(const char *name, compio_archive *archive);
 \paragraph{Выбор алгоритма сжатия.}
 Для каждого встроенного алгоритма реализована своя функция-конструктор: \texttt{compio\_build\_zlib\_compressor}, \texttt{compio\_build\_lz4\_compressor}, \texttt{compio\_build\_zstd\_compressor}, \texttt{compio\_build\_brotli\_compressor}, а также \texttt{compio\_build\_dummy\_compressor} (отсутствие сжатия). Чтобы использовать собственный алгоритм, пользователь должен самостоятельно заполнить структуру \texttt{compio\_compressor}, указав функции \texttt{compress}, \texttt{decompress}, \texttt{get\_buf\_size} и установив поле \texttt{compression\_type} в \texttt{COMPIO\_COMPRESS\_CUSTOM}.
 
-Созданный экземпляр \texttt{compio\_compressor} помещается в поле \texttt{compressor} структуры \texttt{compio\_config}. Затем эта конфигурация передаётся в функцию \texttt{compio\_open\_archive} при создании нового архива (режимы \texttt{"w"}, \texttt{"w+"} или \texttt{"a"}). Чтобы файл-контейнер был самодостаточным, и его можно было арспаковать без дополнительной информации про алгоритм сжатия, библиотека сохраняет значение \texttt{compression\_type} из компрессора в заголовке контейнера.
+Созданный экземпляр \texttt{compio\_compressor} помещается в поле \texttt{compressor} структуры \texttt{compio\_config}. Затем эта конфигурация передаётся в функцию \texttt{compio\_open\_archive} при создании нового архива (режимы \texttt{"w"} и \texttt{"w+"}). Чтобы файл-контейнер был самодостаточным, и его можно было арспаковать без дополнительной информации про алгоритм сжатия, библиотека сохраняет значение \texttt{compression\_type} из компрессора в заголовке контейнера.
 
 Перед открытием существующего архива пользователь может определить тип сжатия, вызвав функцию \texttt{compio\_get\_compression\_type}. Затем он обязан самостоятельно инициализировать компрессор, соответствующий этому типу. Для встроенных алгоритмов это можно сделать с помощью вспомогательной функции \texttt{compio\_build\_compressor\_by\_type}. Для типа \texttt{COMPIO\_COMPRESS\_CUSTOM} пользователь должен предоставить собственную реализацию компрессора, идентичную той, что использовалась при создании архива. 
 
