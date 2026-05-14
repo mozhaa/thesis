@@ -1,4 +1,4 @@
-\documentclass[a4paper,14pt]{extarticle}
+\documentclass[a4paper, 14pt]{extreport}
 
 \usepackage{spbudiploma_tempora}
 
@@ -7,15 +7,20 @@
 \usepackage{makecell}
 \usepackage[pdftex]{graphicx}
 
-\usepackage{amsthm,amssymb, amsmath}
+\usepackage{amsthm, amssymb, amsmath}
 \usepackage{textcomp}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta}
 
-\includeonly{chapters/introduction.tex}
+% \includeonly{chapters/task_definition.tex}
+
+\sloppy
+\renewcommand{\thesection}{\arabic{section}}
 
 \begin{document}
+
+\input{titlepage.tex}
 
 \include{chapters/introduction.tex}
 \include{chapters/literature.tex}
@@ -23,6 +28,6 @@
 \include{chapters/architecture.tex}
 \include{chapters/implementation.tex}
 \include{chapters/experiments.tex}
-\include{citations.tex}
+\include{bibliography.tex}
 
 \end{document}

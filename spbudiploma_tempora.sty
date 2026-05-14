@@ -94,6 +94,16 @@
 % Нумерация только тех формул, на которые в тексте присутствует ссылка
 \usepackage{autonum}
 
+% Verbatim с переносом длинных строк
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily,
+    breaklines=true,
+    breakatwhitespace=false,
+    columns=flexible,
+    keepspaces=true
+}
+
 % Список литературы
 \renewenvironment{thebibliography}[1]
     {\bigskip
