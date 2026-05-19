@@ -5,6 +5,7 @@
 \usepackage{euscript}
 \usepackage{longtable}
 \usepackage{makecell}
+\usepackage{listings}
 \usepackage[pdftex]{graphicx}
 
 \usepackage{amsthm, amssymb, amsmath}
@@ -13,10 +14,15 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta}
 
-\includeonly{chapters/architecture.tex}
+\includeonly{chapters/implementation.tex}
 
 \sloppy
 \renewcommand{\thesection}{\arabic{section}}
+
+\usepackage{listings}
+\usepackage{float}
+\newfloat{listing}{htbp}{lop}
+\floatname{listing}{Листинг}
 
 \begin{document}
 
