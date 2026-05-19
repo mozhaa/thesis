@@ -4,7 +4,7 @@
 
 При разработке библиотеки одними из требований были кроссплатформенность и высокая производительность. Для обеспечения максимальной производительности желателен достаточно низкоуровневый язык. Чтобы предоставить возможность использования библиотеки из любых других языков программирования, необходим API на языке C: его ключевое преимущество --- стабильный C ABI, который поддерживается практически любым языком через механизмы FFI (Foreign Function Interface). 
 
-Исходя из всех этих требований, внутренняя реализация библиотеки выполнена на языке C++ стандарта C++17. Использование C++17 позволило применить современные идиомы: умные указатели (std::unique\_ptr, std::shared\_ptr) для управления памятью, std::optional для безопасной обработки состояний, std::map для кэширования, а также structured bindings для улучшения читаемости кода. При этом пользователю предоставляется исключительно C API, что гарантирует совместимость и простоту интеграции.
+Исходя из всех этих требований, внутренняя реализация библиотеки выполнена на языке C++ стандарта C++17. Использование C++17 позволило применить современные идиомы: умные указатели (std::unique\_ptr, std::shared\_ptr) для управления памятью, std::optional для безопасной обработки состояний, std::map для кэширования, а также structured bindings для улучшения читаемости кода. При этом пользователю предоставляется C API\footnote{Так же Д.\,В.~Корбелайнен был разработан API для C++, однако это выходит за рамки данной работы}, что гарантирует совместимость и простоту интеграции.
 
 Для автоматизации сборки выбран CMake (минимальной версии 3.15). CMake позволяет генерировать проектные файлы для различных сред (Makefiles, Ninja, Visual Studio) и управлять зависимостями. В конфигурации предусмотрены опции для включения/отключения отладочного вывода, а также возможность сборки библиотеки без операций вставки и удаления, что дает прирост производительности, если вышеупомянутые операции не требуются.
 
@@ -19,8 +19,7 @@ API-документация генерируется с помощью Doxygen.
 \paragraph{Открытие и закрытие архива.}
 Для работы с архивом вызывается функция
 \begin{lstlisting}
-compio_archive *compio_open_archive(const char *fp, const char *mode,
-                                    const compio_config *c);
+compio_archive *compio_open_archive(const char *fp, const char *mode, const compio_config *c);
 \end{lstlisting}
 Параметр \texttt{fp} задаёт путь к файлу архива, \texttt{mode} определяет режим доступа:
 \begin{itemize}
@@ -41,12 +40,12 @@ compio_file *compio_open_file(const char *name, compio_archive *archive);
 \paragraph{Операции ввода-вывода.}
 Основные функции для работы с данными:
 \begin{itemize}
-    \item \texttt{uint64\_t compio\_read(void *ptr, uint64\_t\allowbreak{} size, compio\_file\allowbreak{} *file)} --- читает до \texttt{size} байт из текущей позиции файла в буфер \texttt{ptr}, возвращает количество реально прочитанных байт.
-    \item \texttt{uint64\_t compio\_write(const void *ptr, uint64\_t\allowbreak{} size, compio\_file\allowbreak{} *file)} --- записывает \texttt{size} байт из буфера \texttt{ptr} в текущую позицию файла, возвращает число записанных байт.
-    \item \texttt{uint64\_t compio\_insert(const void *ptr, uint64\_t\allowbreak{} size, compio\_file\allowbreak{} *file)} --- вставляет \texttt{size} байт из буфера \texttt{ptr} в текущую позицию файла, сдвигая последующие байты вправо.
-    \item \texttt{uint64\_t compio\_erase(uint64\_t\allowbreak{} size, compio\_file\allowbreak{} *file)} --- удаляет \texttt{size} байт с текущей позиции файла, сдвигая хвост файла влево.
-    \item \texttt{int compio\_seek(compio\_file\allowbreak{} *file, int64\_t\allowbreak{} offset, uint8\_t\allowbreak{} origin)} --- перемещает текущую позицию на \texttt{offset} байт относительно текущей позиции в файле, начала файла или конца файла (управляется аргументом \texttt{origin}).
-    \item \texttt{uint64\_t compio\_tell(compio\_file\allowbreak{} *file)} --- возвращает текущую позицию в файле.
+    \item \texttt{uint64\_t compio\_read(void *ptr, uint64\_t size, compio\_file *file)} --- читает до \texttt{size} байт из текущей позиции файла в буфер \texttt{ptr}, возвращает количество реально прочитанных байт.
+    \item \texttt{uint64\_t compio\_write(const void *ptr, uint64\_t size, compio\_file *file)} --- записывает \texttt{size} байт из буфера \texttt{ptr} в текущую позицию файла, возвращает число записанных байт.
+    \item \texttt{uint64\_t compio\_insert(const void *ptr, uint64\_t size, compio\_file *file)} --- вставляет \texttt{size} байт из буфера \texttt{ptr} в текущую позицию файла, сдвигая последующие байты вправо.
+    \item \texttt{uint64\_t compio\_erase(uint64\_t size, compio\_file *file)} --- удаляет \texttt{size} байт с текущей позиции файла, сдвигая хвост файла влево.
+    \item \texttt{int compio\_seek(compio\_file *file, int64\_t offset, uint8\_t origin)} --- перемещает текущую позицию на \texttt{offset} байт относительно текущей позиции в файле, начала файла или конца файла (управляется аргументом \texttt{origin}).
+    \item \texttt{uint64\_t compio\_tell(compio\_file *file)} --- возвращает текущую позицию в файле.
 \end{itemize}
 Все функции в случае ошибки устанавливают \texttt{errno} (например, \texttt{ENAMETOOLONG}, \texttt{ENFILE}, \texttt{EROFS}, \texttt{EINVAL}).
 
