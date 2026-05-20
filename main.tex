@@ -9,18 +9,26 @@
 \usepackage{svg}
 \usepackage{csquotes}
 
+\makeatletter
+\providecommand\blx@noerroretextools{}
+\makeatother
+\usepackage[style=gost-numeric, backend=biber, language=auto, autolang=other]{biblatex}
+\addbibresource{bibliography.bib}
+
+\defbibheading{bibliography}[\refname]{%
+  \specialsection{Список литературы}}
+
 \usepackage{amsthm, amssymb, amsmath}
 \usepackage{textcomp}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta}
 
-\includeonly{chapters/experiments.tex}
+% \includeonly{chapters/experiments.tex}
 
 \sloppy
 \renewcommand{\thesection}{\arabic{section}}
 
-\usepackage{listings}
 \usepackage{float}
 \newfloat{listing}{htbp}{lop}
 \floatname{listing}{Листинг}
@@ -38,6 +46,7 @@
 \include{chapters/implementation.tex}
 \include{chapters/experiments.tex}
 \include{chapters/conclusion.tex}
-\include{bibliography.tex}
+
+\printbibliography
 
 \end{document}
