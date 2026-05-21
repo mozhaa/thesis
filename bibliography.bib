@@ -14,17 +14,21 @@
   author    = {Johnson, Theodore and Shasha, Dennis},
   title     = {2Q: A Low Overhead High Performance Buffer Management Replacement Algorithm},
   booktitle = {Proceedings of the 20th International Conference on Very Large Data Bases (VLDB)},
+  publisher = {Morgan Kaufmann},
+  address   = {San Francisco, CA, USA},
   pages     = {439--450},
   year      = {1994},
   url       = {http://www.vldb.org/conf/1994/P439.PDF}
 }
 
-@techreport{white2009fits,
-  author      = {White, Richard L. and Allen, Alice and Berriman, G. Bruce and et al.},
-  title       = {Tiled Image Convention for Storing Compressed Images in {FITS} Binary Tables},
-  institution = {NASA/GSFC},
-  year        = {2009},
-  url         = {https://heasarc.gsfc.nasa.gov/docs/software/fitsio/compression/tiled_compression.pdf}
+@misc{white2012tiledimageconventionstoring,
+  title         = {Tiled Image Convention for Storing Compressed Images in FITS Binary Tables},
+  author        = {Richard L. White and Perry Greenfield and William Pence and Doug Tody and Rob Seaman},
+  year          = {2012},
+  eprint        = {1201.1336},
+  archiveprefix = {arXiv},
+  primaryclass  = {astro-ph.IM},
+  url           = {https://arxiv.org/abs/1201.1336}
 }
 
 @article{fritz2011cram,
@@ -42,9 +46,10 @@
 @manual{parquet_format,
   author       = {Apache Software Foundation},
   title        = {Apache Parquet Format Specification},
-  howpublished = {GitHub repository},
+  howpublished = {GitHub репозиторий},
   year         = {2013},
-  url          = {https://github.com/apache/parquet-format}
+  url          = {https://github.com/apache/parquet-format},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @techreport{rfc1951_deflate,
@@ -83,80 +88,92 @@
 @misc{zstd_github,
   author       = {Collet, Yann and Facebook},
   title        = {Zstandard – Real-time data compression algorithm},
-  howpublished = {GitHub repository},
+  howpublished = {GitHub репозиторий},
   year         = {2016},
-  url          = {https://github.com/facebook/zstd}
+  url          = {https://github.com/facebook/zstd},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{zstd_seekable,
   author       = {Facebook},
   title        = {Seekable Format for Zstandard},
-  howpublished = {GitHub (contrib/seekable\_format)},
-  url          = {https://github.com/facebook/zstd/tree/dev/contrib/seekable_format}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/facebook/zstd/tree/dev/contrib/seekable_format},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{zran_example,
   author       = {Adler, Mark and {zlib contributors}},
   title        = {zran.c: Example of deflate stream indexing and random access},
-  howpublished = {zlib/examples/zran.c},
-  url          = {https://github.com/madler/zlib/blob/master/examples/zran.c}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/madler/zlib/blob/master/examples/zran.c},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{brotli_github,
   author       = {Google},
   title        = {Brotli: A generic-purpose lossless compression algorithm},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/google/brotli}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/google/brotli},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{lz4_github,
   author       = {Collet, Yann},
   title        = {LZ4: Extremely Fast Compression algorithm},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/lz4/lz4}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/lz4/lz4},
+  note         = {Дата обращения: 21.05.2026}
 }
 
-@misc{zlib_github,
-  author       = {Adler, Mark and {zlib contributors}},
+@misc{zlib_website,
   title        = {zlib: A Massively Spiffy Yet Delicately Unobtrusive Compression Library},
-  howpublished = {GitHub mirror},
-  url          = {https://github.com/madler/zlib}
+  howpublished = {Электронный ресурс},
+  url          = {https://zlib.net/},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{silesia_corpus,
-  author       = {{Silesia University of Technology}},
+  author       = {Deorowicz, Sebastian},
   title        = {Silesia Compression Corpus},
-  howpublished = {GitHub repository: yewq/Silesia-compression-corpus},
-  url          = {https://github.com/yewq/Silesia-compression-corpus}
+  howpublished = {Электронный ресурс},
+  year         = {2003},
+  url          = {http://sun.aei.polsl.pl/~sdeor/index.php?page=silesia},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{google_benchmark,
   author       = {Google},
   title        = {Google Benchmark: A Microbenchmark Support Library},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/google/benchmark}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/google/benchmark},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{googletest,
   author       = {Google},
   title        = {GoogleTest: Google Testing and Mocking Framework},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/google/googletest}
+  howpublished = {GitHub репозиторий},
+  url          = {https://github.com/google/googletest},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @misc{compio_repo,
   author       = {Lovyagin, Nikita and Mozhaev, Vasilii and Korbelainen, Daniil},
   title        = {Compio: I/O library with transparent compression, efficient random access, and data modification},
-  howpublished = {GitHub repository},
+  howpublished = {GitHub репозиторий},
   url          = {https://github.com/lovyagin/compio},
-  year         = {2026}
+  year         = {2026},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @manual{compio_docs,
-  author = {Lovyagin, Nikita and Mozhaev, Vasilii and Korbelainen, Daniil},
-  title  = {Compio Documentation},
-  url    = {https://lovyagin.github.io/compio/},
-  year   = {2026}
+  author       = {Lovyagin, Nikita and Mozhaev, Vasilii and Korbelainen, Daniil},
+  title        = {Compio Documentation},
+  howpublished = {Электронный ресурс},
+  url          = {https://lovyagin.github.io/compio/},
+  year         = {2026},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @manual{xz-utils,
@@ -165,17 +182,28 @@
   organization = {The Tukaani Project},
   version      = {5.6.0},
   year         = {2024},
-  url          = {https://tukaani.org/xz/}
+  url          = {https://tukaani.org/xz/},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @manual{winrar,
   title        = {RAR Archive Format},
   organization = {RARLAB},
-  url          = {https://www.rarlab.com/}
+  url          = {https://www.rarlab.com/},
+  note         = {Дата обращения: 21.05.2026}
 }
 
 @manual{7zip-format,
   title        = {7z Format},
   organization = {7-Zip},
-  url          = {https://www.7-zip.org/7z.html}
+  url          = {https://www.7-zip.org/7z.html},
+  note         = {Дата обращения: 21.05.2026}
+}
+
+@misc{ltcb,
+  title        = {Large Text Compression Benchmark},
+  author       = {Matt Mahoney},
+  howpublished = {Электронный ресурс},
+  url          = {https://mattmahoney.net/dc/text.html},
+  note         = {Дата обращения: 21.05.2026}
 }
