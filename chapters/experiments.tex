@@ -43,7 +43,7 @@
 
 \begin{figure}[h]
     \centering
-    \includesvg[width=\textwidth]{images/internal-fragmentation.svg}
+    \includesvg[width=\textwidth]{images/1-internal-fragmentation.svg}
     \caption{Динамика количества логических блоков (слева) и средней скорости вставки/удаления (справа) в зависимости от числа выполненных операций. Наивная стратегия (без регулировки размеров блоков, тусклые линии на графике) приводит к неограниченному росту числа блоков и падению скорости до~$\approx$3~МБ/с. Использование порогов \texttt{block\_size\_minimum} и \texttt{block\_size\_maximum} стабилизирует количество блоков на уровне 300--400 и удерживает скорость в диапазоне 20--30~МБ/с.}
     \label{fig:fragmentation}
 \end{figure}
@@ -66,7 +66,9 @@
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{images/alternatives.png}
+    \includesvg[width=\textwidth]{images/2-1-zran.svg}
+    \includesvg[width=\textwidth]{images/2-2-3lines.svg}
+    \includesvg[width=\textwidth]{images/2-3-scatter.svg}
     \caption{Сравнение произвольного чтения: Compio (Zlib, Zstd), seekable zstd и zran.}
     \label{fig:alternatives}
 \end{figure}
@@ -90,14 +92,14 @@
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{images/cache_impact_read.png}
+\includesvg[width=\textwidth]{images/3-1-cache-impact-read.png}
 \caption{Скорость чтения в зависимости от процента попаданий в кэш блоков (слева) и trade-off «скорость – размер файла» при фиксированной локальности 97,5\% (справа).}
 \label{fig:cache_read}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{images/cache_impact_write.png}
+\includesvg[width=\textwidth]{images/3-2-cache-impact-write.png}
 \caption{Скорость записи в зависимости от процента попаданий в кэш блоков (слева) и trade-off «скорость – размер файла» при фиксированной локальности 97,5\% (справа).}
 \label{fig:cache_write}
 \end{figure}
@@ -122,7 +124,7 @@
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{images/algorithms_no_cache.png}
+    \includesvg[width=\textwidth]{images/4-algorithms-comparison.svg}
     \caption{Сравнение алгоритмов сжатия при различных размерах блока: влияние на скорость произвольной записи и размер архива. Кэш отключён.}
     \label{fig:algorithms_no_cache}
 \end{figure}
@@ -158,7 +160,7 @@
 
 \begin{figure}[h]
     \centering
-    \includesvg[width=\textwidth]{images/compression-overhead.svg}
+    \includesvg[width=\textwidth]{images/5-compression-overhead.svg}
     \caption{Накладные расходы при блочном сжатии (zstd, уровень~1) файла \texttt{webster} (39.5~МиБ) в зависимости от размера блока. Размер файла-контейнера складывается из трех величин: \textquote{размер непрерывно сжатого файла}, \textquote{издержки блочного сжатия}, \textquote{издержки метаданных библиотеки}. 100\% соответствует исходному размеру файла. При размере блока 8~КиБ суммарные издержки составляют 8.2\%.}
     \label{fig:overhead} % TODO: расставить везде ~ между числами и там всякими
 \end{figure}
