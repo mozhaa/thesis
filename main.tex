@@ -17,6 +17,32 @@
 \usepackage[style=gost-numeric, backend=biber, language=auto, autolang=other]{biblatex}
 \addbibresource{bibliography.bib}
 
+\DeclareFieldFormat{doi}{%
+  \ifhyperref
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+
+\renewbibmacro*{url+urldate+note}{%
+  \iffieldundef{doi}
+    {\ifboolexpr{
+       test {\ifentrytype{online}}
+       or
+       ( test \ifcitation
+         and
+         togl {cbx:url}
+       )
+       or
+       ( not test \ifcitation
+         and
+         togl {bbx:url}
+       )
+     }
+       {\usebibmacro{url+urldate}}
+       {}%
+     \setunit*{\addsemicolondelim}%
+     \printfield{note}}
+    {}}
+
 \defbibheading{bibliography}[\refname]{%
   \specialsection{Список литературы.}}
 
