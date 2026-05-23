@@ -248,6 +248,29 @@ Compio+Zlib достигает пиковой скорости 153~МБ/с пр�
     \label{fig:overhead} % TODO: расставить везде ~ между числами и там всякими
 \end{figure}
 
+\begin{figure}
+\centering
+\begin{tabular}{lcc}
+\toprule
+  \multirow{2}{*}{\shortstack[l]{Block size\\[3pt](bytes)}} & \multicolumn{2}{c}{Overhead (\% of original)} \\
+  \cmidrule(lr){2-3}
+  & \textbf{Blocked compression} & \textbf{Compio archive} \\
+  \midrule
+    256 & \textbf{36.07}{\small$\,\pm\,7.20$} & \textbf{47.23}{\small$\,\pm\,0.00$} \\
+    512 & \textbf{27.65}{\small$\,\pm\,7.16$} & \textbf{23.86}{\small$\,\pm\,0.00$} \\
+    1024 & \textbf{20.35}{\small$\,\pm\,7.01$} & \textbf{12.18}{\small$\,\pm\,0.00$} \\
+    2048 & \textbf{15.40}{\small$\,\pm\,7.11$} & \textbf{6.34}{\small$\,\pm\,0.00$} \\
+    4096 & \textbf{11.02}{\small$\,\pm\,5.89$} & \textbf{3.41}{\small$\,\pm\,0.00$} \\
+    8192 & \textbf{6.90}{\small$\,\pm\,3.30$} & \textbf{1.95}{\small$\,\pm\,0.00$} \\
+    16384 & \textbf{3.91}{\small$\,\pm\,1.84$} & \textbf{1.21}{\small$\,\pm\,0.00$} \\
+    32768 & \textbf{2.74}{\small$\,\pm\,0.87$} & \textbf{0.85}{\small$\,\pm\,0.00$} \\
+    65536 & \textbf{1.49}{\small$\,\pm\,0.50$} & \textbf{0.68}{\small$\,\pm\,0.00$} \\
+    131072 & \textbf{0.82}{\small$\,\pm\,0.30$} & \textbf{0.59}{\small$\,\pm\,0.00$} \\
+  \bottomrule
+\end{tabular}
+\caption{}
+\end{figure}
+
 На рис.~\ref{fig:overhead} видно, что при размере блока 8 КиБ \textquote{издержки блочного сжатия} составляют около 6.3\%, а метаданные добавляют около 1.9\%. При очень маленьких блоках (256 байт) размер файла-контейнера превышает размер изначального файла, что делает такой архив неприемлемым. При увеличении блока как потери от блочного сжатия так и доля метаданных убывают, стремясь к нулю.
 
 \paragraph{Вывод.}
