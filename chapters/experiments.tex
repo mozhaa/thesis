@@ -97,6 +97,50 @@ Compio+Zlib достигает пиковой скорости 153~МБ/с пр�
     \label{fig:alternatives-2}
 \end{figure}
 
+\begin{figure}
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+  \multirow{2}{*}{\shortstack[l]{Block size\\[3pt](bytes)}} & \multicolumn{6}{c}{Throughput (MB/s)} \\
+  \cmidrule(lr){2-7}
+   & \multicolumn{2}{c}{Region 1} & \multicolumn{2}{c}{Region 2} & \multicolumn{2}{c}{Region 3} \\
+   & \textbf{compio} & \textbf{s. zstd} & \textbf{compio} & \textbf{s. zstd} & \textbf{compio} & \textbf{s. zstd} \\
+  \midrule
+    512 & \textbf{180}{\small$\,\pm\,0.57$} & 110{\small$\,\pm\,0.22$} & \textbf{181}{\small$\,\pm\,0.53$} & 110{\small$\,\pm\,0.20$} & \textbf{186}{\small$\,\pm\,0.31$} & 112{\small$\,\pm\,0.19$} \\
+    1024 & \textbf{269}{\small$\,\pm\,0.56$} & 181{\small$\,\pm\,0.27$} & \textbf{272}{\small$\,\pm\,0.60$} & 183{\small$\,\pm\,0.25$} & \textbf{281}{\small$\,\pm\,0.45$} & 186{\small$\,\pm\,0.30$} \\
+    2048 & \textbf{317}{\small$\,\pm\,0.52$} & 251{\small$\,\pm\,1.07$} & \textbf{323}{\small$\,\pm\,0.69$} & 255{\small$\,\pm\,0.99$} & \textbf{333}{\small$\,\pm\,0.58$} & 261{\small$\,\pm\,1.49$} \\
+    4096 & \textbf{362}{\small$\,\pm\,2.45$} & 322{\small$\,\pm\,2.22$} & \textbf{374}{\small$\,\pm\,1.47$} & 331{\small$\,\pm\,1.03$} & \textbf{392}{\small$\,\pm\,1.82$} & 344{\small$\,\pm\,1.09$} \\
+    8192 & \textbf{344}{\small$\,\pm\,1.36$} & 331{\small$\,\pm\,1.65$} & \textbf{371}{\small$\,\pm\,1.77$} & 353{\small$\,\pm\,1.95$} & \textbf{423}{\small$\,\pm\,1.31$} & 394{\small$\,\pm\,1.94$} \\
+    16384 & \textbf{269}{\small$\,\pm\,1.31$} & 263{\small$\,\pm\,1.14$} & \textbf{303}{\small$\,\pm\,1.71$} & 292{\small$\,\pm\,1.68$} & \textbf{372}{\small$\,\pm\,1.47$} & 353{\small$\,\pm\,1.38$} \\
+    32768 & \textbf{204}{\small$\,\pm\,1.33$} & 199{\small$\,\pm\,1.20$} & \textbf{231}{\small$\,\pm\,1.46$} & 223{\small$\,\pm\,1.48$} & \textbf{286}{\small$\,\pm\,1.81$} & 273{\small$\,\pm\,1.68$} \\
+    65536 & \textbf{130}{\small$\,\pm\,0.86$} & 128{\small$\,\pm\,0.77$} & \textbf{148}{\small$\,\pm\,1.07$} & 145{\small$\,\pm\,1.01$} & \textbf{189}{\small$\,\pm\,1.10$} & 180{\small$\,\pm\,1.11$} \\
+  \bottomrule
+\end{tabular}
+\caption{}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+  \multirow{2}{*}{\shortstack[l]{Block size\\[3pt](bytes)}} & \multicolumn{6}{c}{File size (MB)} \\
+  \cmidrule(lr){2-7}
+   & \multicolumn{2}{c}{Region 1} & \multicolumn{2}{c}{Region 2} & \multicolumn{2}{c}{Region 3} \\
+   & \textbf{compio} & \textbf{s. zstd} & \textbf{compio} & \textbf{s. zstd} & \textbf{compio} & \textbf{s. zstd} \\
+  \midrule
+    512 & 29.5 & \textbf{22.2} & 29.0 & \textbf{21.7} & 29.5 & \textbf{22.2} \\
+    1024 & 23.2 & \textbf{19.6} & 22.6 & \textbf{19.0} & 23.1 & \textbf{19.4} \\
+    2048 & 19.7 & \textbf{17.8} & 19.0 & \textbf{17.1} & 19.6 & \textbf{17.7} \\
+    4096 & 17.5 & \textbf{16.4} & 16.5 & \textbf{15.5} & 16.1 & \textbf{15.1} \\
+    8192 & 16.1 & \textbf{15.5} & 14.2 & \textbf{13.6} & 11.9 & \textbf{11.3} \\
+    16384 & 15.1 & \textbf{14.7} & 12.6 & \textbf{12.2} & 9.4 & \textbf{9.0} \\
+    32768 & 14.8 & \textbf{14.5} & 11.9 & \textbf{11.6} & 8.1 & \textbf{7.8} \\
+    65536 & 14.4 & \textbf{14.1} & 11.4 & \textbf{11.1} & 7.3 & \textbf{7.1} \\
+  \bottomrule
+\end{tabular}
+\caption{}
+\end{figure}
+
 На рис.~\ref{fig:alternatives-2} сравниваются Compio+Zstd (уровень~1) и Seekable Zstd на трёх различных участках файла \texttt{enwik9} (один из них соответствует центральной области файла, которая, как отмечено в описании тестовых данных LTCB, характеризуется повышенной сжимаемостью\cite{ltcb}). Для каждого инструмента все линии имеют одинаковый цвет, а разные участки данных различаются стилем линии (сплошная, пунктирная, точечная). Точки на линиях --- различным значениям параметра гранулярности (размер блока для Compio, размер кадра для Seekable Zstd). Красными кружками отмечены точки, в которых отношение \(\frac{\text{throughput}}{\text{file\_size}}\) максимально для каждого инструмента и каждого участка.
 
 Для обоих инструментов наилучший баланс достигается при размере блока/кадра 8192 или 16384 байт. В этой области кривые Compio+Zstd и Seekable Zstd практически совпадают как по скорости чтения, так и по размеру архива. При малых блоках (512--1024 байт) оба инструмента показывают низкую скорость из-за высоких накладных расходов; при больших (128 КБ и выше) скорость падает, а выигрыш в размере архива становится незначительным. Таким образом, по ключевой метрике баланса между скоростью и степенью сжатия Compio+Zstd не уступает специализированному инструменту Seekable Zstd.
