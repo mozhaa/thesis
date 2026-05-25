@@ -1,0 +1,1 @@
+С/C++ library, lossless data compression, blocked compression, random access to compressed data, B-tree, deferred operations in B-trees, 2Q-LRU
