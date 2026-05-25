@@ -12,7 +12,7 @@
 
 \subsection{Документация.}
 
-API-документация генерируется с помощью Doxygen. Комментарии в заголовочном файле \texttt{compio.h} оформлены в формате, понятном Doxygen, что позволяет автоматически создавать HTML-версию справочного руководства. Также настроены GitHub Actions для автоматической генерации документации, которая доступна по ссылке\cite{compio_docs}.
+API-документация генерируется с помощью Doxygen. Комментарии в заголовочном файле \texttt{compio.h} оформлены в формате, понятном Doxygen, что позволяет автоматически создавать HTML-версию справочного руководства. Также настроены GitHub Actions для автоматической генерации документации, которая лежит в публичном доступе (см.~\ref{compio_docs}).
 
 \subsection{API для языка C.}
 
@@ -72,7 +72,7 @@ compio_file *compio_open_file(const char *name, compio_archive *archive);
 \texttt{cache\_size\_\_blocks} & \texttt{int} & Ёмкость кэша блоков данных (количество) \\
 \hline
 \end{tabular}
-\caption{Поля структуры \texttt{compio\_config}, относящиеся к данной работе. Остальные поля (\texttt{allocation\_strategy}, \texttt{fill\_holes\_with\_zeros}, \texttt{fragmentation\_threshold}, \texttt{max\_files}, \texttt{wal\_max\_size\_bytes}, \texttt{checksum\_type}, \texttt{wal\_sync\_mode}, \texttt{auto\_batch\_size}) относятся к компонентам, реализованным Д.\,В.~Корбелайнен, и не рассматриваются в данной работе (однако полностью описаны в документации\cite{compio_docs}).}
+\caption{Поля структуры \texttt{compio\_config}, относящиеся к данной работе. Остальные поля (\texttt{allocation\_strategy}, \texttt{fill\_holes\_with\_zeros}, \texttt{fragmentation\_threshold}, \texttt{max\_files}, \texttt{wal\_max\_size\_bytes}, \texttt{checksum\_type}, \texttt{wal\_sync\_mode}, \texttt{auto\_batch\_size}) относятся к компонентам, реализованным Д.\,В.~Корбелайнен, и не рассматриваются в данной работе (однако полностью описаны в документации, см.~\ref{compio_docs}).}
 \label{tab:config-fields}
 \end{table}
 
