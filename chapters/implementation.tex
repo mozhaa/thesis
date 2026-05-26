@@ -8,7 +8,7 @@
 
 Для автоматизации сборки выбран CMake (минимальной версии 3.15). CMake позволяет генерировать проектные файлы для различных сред (Makefiles, Ninja, Visual Studio) и управлять зависимостями. В конфигурации предусмотрены опции для включения/отключения отладочного вывода, а также возможность сборки библиотеки без операций вставки и удаления, что дает прирост производительности, если вышеупомянутые операции не требуются.
 
-Для управления внешними зависимостями предоставлены файлы \texttt{vcpkg.json} и \texttt{conanfile.txt} для систем пакетов vcpkg и Conan соответственно. В качестве внешних зависимостей библиотека использует \texttt{Zlib}\cite{zlib_website}, \texttt{Zstd}\cite{zstd_github}, \texttt{LZ4}\cite{lz4_github} и \texttt{Brotli}\cite{brotli_github} --- реализации соответствующих алгоритмов сжатия, которые пользователь может выбрать при конфигурации архива (см.~\ref{compression_algorithm}). Для модульного тестирования и измерения производительности применяются \texttt{Google Test}\cite{googletest} и \texttt{Google Benchmark}\cite{google_benchmark}.
+Для управления внешними зависимостями предоставлены файлы \texttt{vcpkg.json} и \texttt{conanfile.txt} для систем пакетов vcpkg и Conan соответственно. В качестве внешних зависимостей библиотека использует Zlib\cite{zlib_website}, Zstd\cite{zstd_github}, LZ4\cite{lz4_github} и Brotli\cite{brotli_github} --- реализации соответствующих алгоритмов сжатия, которые пользователь может выбрать при конфигурации архива (см.~\ref{compression_algorithm}). Для модульного тестирования и измерения производительности применяются Google Test\cite{googletest} и Google Benchmark\cite{google_benchmark}.
 
 \subsection{Документация.}
 
@@ -118,7 +118,7 @@ int main() {
     return 0;
 }
 \end{lstlisting}
-\caption{Пример использования библиотеки \texttt{Compio} через API на C.}
+\caption{Пример использования библиотеки Compio через API на C.}
 \label{lst:compio_example}
 \end{listing}
 
